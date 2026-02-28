@@ -62,7 +62,7 @@ Read these when relevant to the task at hand:
 
 ## Hard Constraints
 
-- **NEVER run Python interactively in the terminal.** Always use SLURM job scripts. Interactive execution causes CPU time limit exceeded errors and core dumps on this system.
+- **NEVER run Python interactively in the terminal.** Always use SLURM job scripts. Interactive execution causes CPU time limit exceeded errors and core dumps on this system. This includes `python -c "..."` one-liners — even importing torch directly on the login node can trigger a core dump due to CUDA initialization hitting the CPU time limit.
 - **~50 hours total budget.** Track time in PROGRESS.md. Pivot early if something eats hours without progress.
 - **Interpretability is the centerpiece, not model performance.** Don't optimize SPOTER beyond reproducing ~63% on WLASL100.
 - **Report:** ACL LaTeX format on Overleaf. Proposal grows into final report (same document).
