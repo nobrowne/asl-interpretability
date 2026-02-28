@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtual environment
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# SLURM output logs
+slurm/*.out
+
+# Model checkpoints and large tensors (track in results/ via .gitkeep but don't commit actual files)
+results/checkpoints/*.pt
+results/checkpoints/*.pth
+*.pt
+*.pth
+*.safetensors
+
+# Large extracted data (attention weights, representations, probe data)
+results/**/*.npy
+results/**/*.npz
+results/**/*.pkl
+results/**/*.pickle
+
+# Figures are committed (they go in the report), but intermediate/draft figures are not
+figures/draft_*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# uv / pip
+*.lock
