@@ -14,7 +14,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SPOTER_DIR="${SCRIPT_DIR}/../../spoter"
 DATA_DIR="${SPOTER_DIR}/data"
-RELEASE_BASE="https://github.com/matyasbohacek/spoter/releases/download/supplementary-data"
+RELEASE_BASE="https://github.com/maty-bohacek/spoter/releases/download/supplementary-data"
 
 mkdir -p "${DATA_DIR}"
 

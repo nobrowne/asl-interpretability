@@ -17,6 +17,8 @@
 
 set -euo pipefail
 
+module load python/3.12
+
 if [[ $# -lt 1 ]]; then
     echo "Usage: sbatch slurm/analysis.sh <script_name.py> [args...]"
     exit 1
