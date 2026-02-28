@@ -17,7 +17,7 @@
 
 set -euo pipefail
 
-module load python/3.12
+export PATH="$HOME/.local/bin:$PATH"
 
 if [[ $# -lt 1 ]]; then
     echo "Usage: sbatch slurm/analysis.sh <script_name.py> [args...]"

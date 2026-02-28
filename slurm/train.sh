@@ -18,7 +18,7 @@
 
 set -euo pipefail
 
-module load python/3.12
+export PATH="$HOME/.local/bin:$PATH"
 
 ANALYSIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DATA_DIR="${ANALYSIS_DIR}/../spoter/data"
