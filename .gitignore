@@ -20,18 +20,20 @@ venv/
 # SLURM output logs
 slurm/*.out
 
-# Model checkpoints and large tensors (track in results/ via .gitkeep but don't commit actual files)
-results/checkpoints/*.pt
-results/checkpoints/*.pth
+# results/ is a symlink to ~/nobackup/autodelete/asl-interpretability/results/
+# (fast autodelete storage — files are not tracked in git)
+results
+
+# Large tensors
 *.pt
 *.pth
 *.safetensors
 
 # Large extracted data (attention weights, representations, probe data)
-results/**/*.npy
-results/**/*.npz
-results/**/*.pkl
-results/**/*.pickle
+*.npy
+*.npz
+*.pkl
+*.pickle
 
 # Figures are committed (they go in the report), but intermediate/draft figures are not
 figures/draft_*
