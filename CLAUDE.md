@@ -124,6 +124,12 @@ source ~/projects/asl-interpretability/analysis/.venv/bin/activate
 pytest tests/ -v
 ```
 
+## Git Workflow
+
+- **Atomic commits:** Each commit should represent one logical change (a bug fix, a new script, a config change). Do not bundle unrelated changes into one commit.
+- **Commit order within a session:** infrastructure/fixes first, then new features, then docs.
+- **Docs last:** PROGRESS.md and DECISIONS.md updates go in a final commit at the end of the session, separate from code changes.
+
 ## Session Protocol
 
 1. **Start of session:** Read PROGRESS.md to restore context.
