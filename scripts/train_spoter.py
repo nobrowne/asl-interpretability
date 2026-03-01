@@ -56,6 +56,7 @@ if not _SPOTER_DIR.exists():
         "Make sure it is cloned at ../spoter relative to the analysis repo."
     )
 
+sys.path.insert(0, str(_ANALYSIS_DIR / "stubs"))  # numpy cv2 stub — avoids opencv's bundled OpenSSL (FIPS incompatible)
 sys.path.insert(0, str(_SPOTER_DIR))
 os.chdir(_SPOTER_DIR)  # Required so bare imports (`augmentations`, `normalization`) resolve.
 
