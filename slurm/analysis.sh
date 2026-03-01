@@ -18,13 +18,14 @@
 set -euo pipefail
 
 export PATH="$HOME/.local/bin:$PATH"
+module load python/3.12
 
 if [[ $# -lt 1 ]]; then
     echo "Usage: sbatch slurm/analysis.sh <script_name.py> [args...]"
     exit 1
 fi
 
-ANALYSIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ANALYSIS_DIR="${SLURM_SUBMIT_DIR}"
 SCRIPT="$1"
 shift
 

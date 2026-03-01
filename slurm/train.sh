@@ -19,8 +19,9 @@
 set -euo pipefail
 
 export PATH="$HOME/.local/bin:$PATH"
+module load python/3.12
 
-ANALYSIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ANALYSIS_DIR="${SLURM_SUBMIT_DIR}"
 DATA_DIR="${ANALYSIS_DIR}/../spoter/data"
 
 source "${ANALYSIS_DIR}/.venv/bin/activate"
