@@ -229,6 +229,15 @@ def main() -> None:
     # Model
     # -----------------------------------------------------------------------
     model = SPOTER(num_classes=args.num_classes, hidden_dim=args.hidden_dim)
+
+    # PyTorch 2.6 compatibility: TransformerDecoder.forward now accesses
+    # layer.self_attn.batch_first, but SPOTERTransformerDecoderLayer deletes
+    # self_attn in __init__. Restore a minimal stub on each decoder layer.
+    import types
+    for layer in model.transformer.decoder.layers:
+        if not hasattr(layer, "self_attn"):
+            layer.self_attn = types.SimpleNamespace(batch_first=False)
+
     model.train(True)
     model.to(device)
     logging.info(

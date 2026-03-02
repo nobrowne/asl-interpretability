@@ -336,6 +336,15 @@ def main() -> None:
     # Load model.
     # -----------------------------------------------------------------------
     model = SPOTER(num_classes=args.num_classes, hidden_dim=args.hidden_dim)
+
+    # PyTorch 2.6 compatibility: TransformerDecoder.forward now accesses
+    # layer.self_attn.batch_first, but SPOTERTransformerDecoderLayer deletes
+    # self_attn in __init__. Restore a minimal stub on each decoder layer.
+    import types
+    for layer in model.transformer.decoder.layers:
+        if not hasattr(layer, "self_attn"):
+            layer.self_attn = types.SimpleNamespace(batch_first=False)
+
     ckpt = torch.load(checkpoint_path, map_location=device, weights_only=False)
     model.load_state_dict(ckpt["model_state_dict"])
     model.eval()
