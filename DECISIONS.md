@@ -1,5 +1,11 @@
 # Technical Decisions
 
+## 2026-03-01 — PyTorch 2.6 compatibility: self_attn stub on decoder layers
+**Context:** `SPOTERTransformerDecoderLayer.__init__` does `del self.self_attn` to remove the redundant decoder self-attention. In PyTorch 2.6, `TransformerDecoder.forward` was updated to call `_get_seq_len(tgt, self.layers[0].self_attn.batch_first)`, which crashes with `AttributeError` when `self_attn` has been deleted.
+**Decision:** After creating the SPOTER model, add `layer.self_attn = types.SimpleNamespace(batch_first=False)` to each decoder layer that's missing the attribute. Applied in both `train_spoter.py` and `extract_attention.py`.
+**Rationale:** Keeps the SPOTER clone unmodified. The stub provides only the one attribute PyTorch reads (`batch_first`); no actual attention computation goes through it.
+**Alternatives considered:** Patching `spoter/spoter/spoter_model.py` directly (modifies the clone); subclassing `TransformerDecoder` to override `forward` (more invasive).
+
 ## 2026-02-28 — Training wrapper as separate script, not patch to train.py
 **Context:** Needed to add epoch-specific checkpoint saving to SPOTER's training loop.
 **Decision:** Write `scripts/train_spoter.py` as a standalone wrapper that imports from the spoter clone rather than modifying `spoter/train.py`.
